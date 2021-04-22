@@ -29,9 +29,9 @@ def remove_timestamp(file):
         print('Done')           
     except Exception as e:
         print(f'Failed because: {e}')
-
-file_path = input('input file name from this folder: ')
-remove_timestamp(file_path)
+if __name__ == __main__:
+    file_path = input('input file name from this folder: ')
+    remove_timestamp(file_path)
 
 
 
