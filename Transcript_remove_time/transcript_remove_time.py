@@ -1,4 +1,10 @@
 def remove_timestamp(file):
+    '''
+    remove_timestamp(file) <-- .txt file
+    
+    This function removes time stamps in .txt files with time stamps as lines following
+    Youtube's format
+    '''
     import re
     try:
         with open(file,'r') as f:
