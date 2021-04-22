@@ -6,6 +6,7 @@ def remove_timestamp(file):
     Youtube's format
     '''
     import re
+    import string
     try:
         with open(file,'r') as f:
             text_file = f.readlines()
@@ -14,8 +15,7 @@ def remove_timestamp(file):
 
         with open(f'{file}_clean.txt','w') as g:
             for line in text_file:
-                test = re.sub(r":",'',line)
-                test = re.sub(r"'",'',test)
+                test = line.translate(str.maketrans('', '', string.punctuation))
                 test = test.replace('\n','')
                 alnum_test = [x.isalnum() for x in test.split(' ')]
                 num_test = [x.isdigit() for x in test.split(' ')]
@@ -24,11 +24,9 @@ def remove_timestamp(file):
                     continue
                 if all(alnum_test):
                     g.write(line)
-                    
+        print('Done')           
     except Exception as e:
         print(f'Failed because: {e}')
-    print('Cleaning Successful')
-
 
 file_path = input('input file name from this folder: ')
 remove_timestamp(file_path)
