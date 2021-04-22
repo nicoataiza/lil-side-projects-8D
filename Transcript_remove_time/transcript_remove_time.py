@@ -18,10 +18,7 @@ def remove_timestamp(file):
                 exclude = set(string.punctuation)
                 s = ''.join(ch for ch in line if ch not in exclude)
                 test = s.replace('\n','')
-                text = []
-                for word in test.split(' '):
-                    if word.isalnum():
-                        text.append(word)
+                text = [x for x in test.split(' ') of x.isalnum()]
                 alnum_test = [x.isalnum() for x in text]
                 num_test = [x.isdigit() for x in text]
 
