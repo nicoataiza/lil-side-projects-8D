@@ -3,7 +3,7 @@ def remove_timestamp(file):
     remove_timestamp(file) <-- .txt file
     
     This function removes time stamps in .txt files with time stamps as lines following
-    Youtube's format
+    Youtube's format or SRT files
     '''
     import re
     import string
@@ -15,10 +15,15 @@ def remove_timestamp(file):
 
         with open(f'{file}_clean.txt','w') as g:
             for line in text_file:
-                test = line.translate(str.maketrans('', '', string.punctuation))
-                test = test.replace('\n','')
-                alnum_test = [x.isalnum() for x in test.split(' ')]
-                num_test = [x.isdigit() for x in test.split(' ')]
+                exclude = set(string.punctuation)
+                s = ''.join(ch for ch in line if ch not in exclude)
+                test = s.replace('\n','')
+                text = []
+                for word in test.split(' '):
+                    if word.isalnum():
+                        text.append(word)
+                alnum_test = [x.isalnum() for x in text]
+                num_test = [x.isdigit() for x in text]
 
                 if all(num_test):
                     continue
